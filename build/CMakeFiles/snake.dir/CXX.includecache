@@ -1,0 +1,46 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/ptumulty/Developer/Projects/Snake/src/Snake.hpp
+iostream
+-
+vector
+-
+
+/Users/ptumulty/Developer/Projects/Snake/src/SnakeGame.cpp
+stdio.h
+-
+ncurses.h
+-
+iostream
+-
+unistd.h
+-
+stdlib.h
+-
+SnakeGame.hpp
+/Users/ptumulty/Developer/Projects/Snake/src/SnakeGame.hpp
+Snake.hpp
+/Users/ptumulty/Developer/Projects/Snake/src/Snake.hpp
+
+/Users/ptumulty/Developer/Projects/Snake/src/SnakeGame.hpp
+stdio.h
+-
+ncurses.h
+-
+iostream
+-
+unistd.h
+-
+random
+-
+vector
+-
+Snake.hpp
+/Users/ptumulty/Developer/Projects/Snake/src/Snake.hpp
+
