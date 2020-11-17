@@ -11,8 +11,8 @@
 
 SnakeGame::SnakeGame()
 {  
-    this->start_up();
-    this->main_loop();
+    start_up();
+    main_loop();
 }
 
 SnakeGame::~SnakeGame()
@@ -22,7 +22,7 @@ SnakeGame::~SnakeGame()
 
 void SnakeGame::start_up()
 {
-    this->create_snake();
+    create_snake();
     game_over = false;
     initscr();
 	clear();
@@ -36,8 +36,8 @@ void SnakeGame::start_up()
     yPos = 5;
     xApple = 10;
     yApple = 10;
-    // this->getNextApple();
-    this->draw_field();
+    // getNextApple();
+    draw_field();
 }
 
 void SnakeGame::init_rand_num()
@@ -47,12 +47,12 @@ void SnakeGame::init_rand_num()
 
 void SnakeGame::create_snake()
 {
-    this->snake = new Snake();
-    this->snake->append(5, 5);
-    this->snake->append(5, 4);
-    this->snake->append(5, 3);
-    this->snake->append(5, 2);
-    this->snake_direction = DOWN;
+    snake = new Snake();
+    snake->append(5, 5);
+    snake->append(5, 4);
+    snake->append(5, 3);
+    snake->append(5, 2);
+    snake_direction = DOWN;
 }
 
 void SnakeGame::main_loop()
@@ -62,7 +62,7 @@ void SnakeGame::main_loop()
         usleep(0.2 * 1000000);
 
         keyboard_input = wgetch(snake_window);
-        this->input_handler();
+        input_handler();
             
         if (snake_direction == UP)          { yPos--; }
         else if (snake_direction == DOWN)   { yPos++; } 
@@ -71,20 +71,20 @@ void SnakeGame::main_loop()
     
         if (xPos == xApple && yPos == yApple)
         {   
-            this->getNextApple();
-            this->snake->move_and_add(xPos, yPos);
-            this->incrementScore();
+            getNextApple();
+            snake->move_and_add(xPos, yPos);
+            incrementScore();
         }
         else
         {
-            this->snake->move(xPos, yPos);
+            snake->move(xPos, yPos);
         }
         
 
         draw_field();
         if (xPos == 0 || xPos == 19) { game_over = true; }
         else if (yPos == 0 || yPos == 19) { game_over = true; }
-        else if (this->snake->is_snake(xPos, yPos, false)) { game_over = true; }
+        else if (snake->is_snake(xPos, yPos, false)) { game_over = true; }
         
     }
     draw_game_over();
@@ -134,7 +134,7 @@ void SnakeGame::draw_field()
     {
         for (int x = 0; x < 20; x++)
         {
-            if (this->snake->is_snake(y, x, true))
+            if (snake->is_snake(y, x, true))
             {
                 mvwaddch(snake_window, x, y, 64);
             }
@@ -156,13 +156,13 @@ void SnakeGame::draw_field()
             }
         }
     }
-    this->draw_line(20);
-    std::string sc = std::to_string(this->getScore());
+    draw_line(20);
+    std::string sc = std::to_string(getScore());
     for (int i = 0; i < sc.size(); i++)
         mvwaddch(snake_window, 21, i+1, sc.at(i)); 
     for (int i = 0; i < title.size(); i++)
         mvwaddch(snake_window, 21, i+6, title.at(i)); 
-    this->draw_line(22);
+    draw_line(22);
     wrefresh(snake_window);
 }
 
@@ -180,7 +180,7 @@ void SnakeGame::draw_game_over()
     {
         for (int x = 0; x < 20; x++)
         {
-            if (this->snake->is_snake(y, x, true))
+            if (snake->is_snake(y, x, true))
             {
                 mvwaddch(snake_window, x, y, 64);
             }
@@ -208,13 +208,13 @@ void SnakeGame::draw_game_over()
     for (int i = 0; i < score_string(getScore()).size(); i++)
         mvwaddch(snake_window, 10, i+5, score_string(getScore()).at(i)); 
 
-    this->draw_line(20);
-    std::string sc = std::to_string(this->getScore());
+    draw_line(20);
+    std::string sc = std::to_string(getScore());
     for (int i = 0; i < sc.size(); i++)
         mvwaddch(snake_window, 21, i+1, sc.at(i)); 
     for (int i = 0; i < title.size(); i++)
         mvwaddch(snake_window, 21, i+6, title.at(i)); 
-    this->draw_line(22);
+    draw_line(22);
 
     wrefresh(snake_window);
 
@@ -222,12 +222,12 @@ void SnakeGame::draw_game_over()
 
 int SnakeGame::getScore()
 {
-    return this->score;
+    return score;
 }
 
 void SnakeGame::incrementScore()
 {
-    this->score++;
+    score++;
 }
 
 void SnakeGame::getNextApple()
@@ -238,13 +238,13 @@ void SnakeGame::getNextApple()
     {
         xNew = (rand() % 18) + 1;
         yNew = (rand() % 18) + 1;
-        if ( (xNew != this->xPos && yNew != this->yPos) && (this->snake->is_snake(xNew, yNew, true) == false) )
+        if ( (xNew != xPos && yNew != yPos) && (snake->is_snake(xNew, yNew, true) == false) )
         {
             break;
         }
     }
-    this->xApple = xNew;
-    this->yApple = yNew;
+    xApple = xNew;
+    yApple = yNew;
 }
 
 std::string SnakeGame::score_string(int score)
