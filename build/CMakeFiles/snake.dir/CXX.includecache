@@ -6,6 +6,12 @@
 
 #IncludeRegexTransform: 
 
+/Users/ptumulty/Developer/Projects/Snake/src/Snake.cpp
+iostream
+-
+Snake.hpp
+/Users/ptumulty/Developer/Projects/Snake/src/Snake.hpp
+
 /Users/ptumulty/Developer/Projects/Snake/src/Snake.hpp
 iostream
 -
